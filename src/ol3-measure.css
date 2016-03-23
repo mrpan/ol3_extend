@@ -59,13 +59,25 @@
       opacity: 0.7;
       white-space: nowrap;
     }
+.helpTooltip{
+   position: relative;
+    background: rgba(236, 234, 230, 0.5);
+    border-radius: 4px;
+    color: #0C0C0C;
+    padding: 4px 8px;
+    /* opacity: 0.7; */
+    white-space: nowrap;
+}
+.measureContent{
+  padding-right: 10px;
+}
 .tooltip-measure {
       opacity: 1;
       font-weight: bold;
     }
 .tooltip-static {
-      background-color: #ffcc33;
-      color: black;
+      background-color: #0c0c0c;
+      color: #F5EAEA;
       border: 1px solid white;
     }
 .tooltip-measure:before,.tooltip-static:before {
@@ -85,7 +97,7 @@
 .ol-measure-closer {
         text-decoration: none;
         position: absolute;
-        top: 0px;
+        top: 2px;
         right: 2px;
 }
  .ol-measure-closer:after {

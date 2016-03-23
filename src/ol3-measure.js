@@ -129,18 +129,24 @@ ol.control.Measure.prototype.addDrawInteraction = function(){
          
             output = that.formatLength(geom);
             tooltipCoord = geom.getLastCoordinate();
-            that.measureContent.innerHTML = output;
-            that.measureTooltip.setPosition(tooltipCoord);
+            that.helpTooltipElement.innerHTML = output;
+            that.helpTooltip.setPosition(tooltipCoord);
             });
           }, this.draw);
      this.draw.on('drawend',
-          function() {
+          function(evt) {
             that.measureTooltipElement.className = 'measureTooltip tooltip-static';
             that.measureTooltip.setOffset([0, -7]);
             // unset sketch
-            that.sketch = null;
-            // unset tooltip so that a new one can be created
-            that.measureTooltipElement = null;
+             that.sketch = evt.feature;
+
+            var tooltipCoord = evt.coordinate;
+            var geom = that.sketch.getGeometry();
+           var output = that.formatLength(geom);
+            tooltipCoord = geom.getLastCoordinate();
+            that.measureContent.innerHTML = output;
+            that.measureTooltip.setPosition(tooltipCoord);
+            that.helpTooltipElement.innerHTML="";
             ol.Observable.unByKey(listener);
             this.setActive(false);
           }, this.draw);
@@ -154,7 +160,7 @@ ol.control.Measure.prototype.createHelpTooltip= function() {
             this.helpTooltipElement.parentNode.removeChild(this.helpTooltipElement);
           }
           this.helpTooltipElement = document.createElement('div');
-          this.helpTooltipElement.className = 'measureTooltip hidden';
+          this.helpTooltipElement.className = 'helpTooltip hidden';
           this.helpTooltip = new ol.Overlay({
             element: this.helpTooltipElement,
             offset: [15, 0],
@@ -173,6 +179,7 @@ ol.control.Measure.prototype.createMeasureTooltip = function() {
       this.closeElement.className ='ol-measure-closer';
       this.measureTooltipElement.appendChild(this.closeElement);
       this.measureContent = document.createElement('div');
+      this.measureContent.className='measureContent';
       this.measureTooltipElement.appendChild(this.measureContent);
       this.measureTooltipElement.className = 'measureTooltip tooltip-measure';
       this.measureTooltip = new ol.Overlay({
