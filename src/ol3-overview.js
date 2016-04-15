@@ -16,6 +16,7 @@ ol.control.Overview = function(opt_options)
 {	var options = opt_options || {};
 	var self = this;
 
+
 	// API 
 	this.minZoom = options.minZoom || 0;
 	this.maxZoom = options.maxZoom || 18;
